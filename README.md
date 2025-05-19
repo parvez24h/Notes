@@ -3,6 +3,7 @@
 **Nodes** is a simple note-taking app built with **Flutter** and **Firebase**. It allows users to register, log in, create, and read notes in real-time.
 
 ---
+![Screens](https://github.com/parvez24h/Notes/blob/master/notes_screens.png?raw=true)
 
 ## 🔧 Features
 
