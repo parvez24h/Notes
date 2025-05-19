@@ -34,20 +34,20 @@ class _HomePageState extends State<HomePage> {
                 );
               }
               if(snapshot.data!.docs.isEmpty){
-                return Text("SNo Data Found");
+                return Text("No Data Found");
               }
 
               if(snapshot != null && snapshot.data != null){
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index){
-                      return Card(
-                        child: ListTile(title: Text(
-                          "Title: "+snapshot.data!.docs[index]['title']+"\n"+
-                            "Description: "+ snapshot.data!.docs[index]['description']
-                        ),),
-                      );
-                    }
+                  itemBuilder: (context, index){
+                    return Card(
+                      child: ListTile(title: Text(
+                        "Title: "+snapshot.data!.docs[index]['title']+"\n"+
+                          "Description: "+ snapshot.data!.docs[index]['description']
+                      ),),
+                    );
+                  }
                 );
               }
 

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/views/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,10 +24,9 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.pink,
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
 
-            Text("LOGin", style: TextStyle(color: Colors.yellow, fontSize: 30, fontWeight: FontWeight.bold),),
 
             SizedBox(height: 20,),
 
@@ -135,16 +135,24 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () async{
 
 
-                          String email1 = emailEditingController.text.toString();
+                          String email = emailEditingController.text.toString();
                           String pass = passEditingController.text.toString();
 
+                          print(email);
+                          print(pass);
 
-                          var sharedPreferences = await SharedPreferences.getInstance();
+                          var query = await FirebaseFirestore.instance.collection("users")
+                          .where('email', isEqualTo: email)
+                          .limit(1).get();
 
-                          sharedPreferences.setBool("auth", true);
+                          if(query.docs.isNotEmpty){
+                            var sharedPreferences = await SharedPreferences.getInstance();
+
+                            sharedPreferences.setBool("auth", true);
 
 
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const HomePage()));
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const HomePage()));
+                          }
 
                         },
                         child: Text("Login", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.blue),)
@@ -156,7 +164,11 @@ class _LoginPageState extends State<LoginPage> {
                     child: SizedBox(width: 20,)
                 ),
               ],
-            )
+            ),
+
+            SizedBox(height: 20,),
+
+            Text("Don't have an account? Register")
 
 
 
