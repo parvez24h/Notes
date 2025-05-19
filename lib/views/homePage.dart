@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:notes/views/addNotePage.dart';
 
 
 
@@ -21,7 +22,16 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Text("Home Screen", style: TextStyle(color: Colors.black, fontSize: 25),)
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (_)=>const AddNotePage())
+          );
+        },
+        child: Icon(Icons.add),
+        tooltip: 'Add',
+      ),
 
     );
   }
