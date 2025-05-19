@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:notes/views/homePage.dart';
+import 'package:notes/views/loginPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,13 +13,17 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
 
+  var mAuth = false;
   @override
   void initState() {
     super.initState();
+
+    getData();
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     Future.delayed(const Duration(seconds: 3), (){
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_)=>const HomePage())
+        MaterialPageRoute(builder: (_)=>mAuth?const HomePage():const LoginPage())
       );
     });
   }
@@ -44,5 +50,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         ),
       ),
     );
+  }
+
+  void getData() async{
+    var sharedPreferences = await SharedPreferences.getInstance();
+    var isLogin = sharedPreferences.getBool("auth");
+    mAuth = (isLogin!=null && isLogin)?true:false;
   }
 }
