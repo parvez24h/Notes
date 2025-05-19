@@ -7,7 +7,7 @@
 
 ## 🔧 Features
 
-- 🔐 Firebase Authentication (Email & Password)
+- 🔐 User Login and Registration (Email & Password)
 - 📝 Create and Read Notes using Cloud Firestore
 - 🔄 Real-time updates
 - 💡 Clean and minimal UI
