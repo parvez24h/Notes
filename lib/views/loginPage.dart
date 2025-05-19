@@ -139,11 +139,9 @@ class _LoginPageState extends State<LoginPage> {
                           String email = emailEditingController.text.toString();
                           String pass = passEditingController.text.toString();
 
-                          print(email);
-                          print(pass);
-
                           var query = await FirebaseFirestore.instance.collection("users")
                           .where('email', isEqualTo: email)
+                          .where('password',isEqualTo: pass)
                           .limit(1).get();
 
                           if(query.docs.isNotEmpty){
@@ -169,7 +167,18 @@ class _LoginPageState extends State<LoginPage> {
 
             SizedBox(height: 20,),
 
-            Text("Don't have an account? Register")
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account?"),
+                SizedBox(width: 10,),
+                ElevatedButton(
+                  onPressed: ()=>{
+                    GoRouter.of(context).go('/register')
+                  },
+                  child: Text("Register")),
+              ],
+            )
 
 
 

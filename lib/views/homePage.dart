@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes/views/addNotePage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -19,7 +20,30 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Notes", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+        title: Row(
+          children: [
+            Expanded(flex: 1,child: Text("Notes", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+            Expanded(
+                flex: 1,
+                child: Container(
+                  alignment: Alignment.topRight,
+                  child: ElevatedButton(
+                    onPressed: ()async{
+
+                      var sharedPreferences = await SharedPreferences.getInstance();
+
+                      sharedPreferences.setBool("auth", false);
+
+                      GoRouter.of(context).go('/login');
+                    },
+                    child: Text("Logout", style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+            ),
+
+          ],
+        ),
         backgroundColor: Colors.pink,
       ),
       body: Container(

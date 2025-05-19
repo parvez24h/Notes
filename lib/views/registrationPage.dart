@@ -194,7 +194,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               print("User registered")
                             });
 
-                        GoRouter.of(context).go('/home');
+                        GoRouter.of(context).go('/login');
 
                       },
                       child: Text("Register", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.blue),)
@@ -210,7 +210,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
           SizedBox(height: 20,),
 
-          Text("Already register Please Login")
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Already register Please"),
+              SizedBox(width: 10,),
+              ElevatedButton(
+                  onPressed: ()=>{
+                    GoRouter.of(context).go('/login')
+                  },
+                  child: Text("Login")),
+            ],
+          )
 
 
 
