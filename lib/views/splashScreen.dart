@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     Future.delayed(const Duration(seconds: 3), (){
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_)=>mAuth?const HomePage():const LoginPage())
+        MaterialPageRoute(builder: (_)=>mAuth?const HomePage():const HomePage())
       );
     });
   }
