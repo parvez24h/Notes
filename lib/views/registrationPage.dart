@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'homePage.dart';
 
@@ -193,7 +194,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               print("User registered")
                             });
 
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const HomePage()));
+                        GoRouter.of(context).go('/home');
 
                       },
                       child: Text("Register", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.blue),)

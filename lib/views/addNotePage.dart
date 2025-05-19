@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AddNotePage extends StatefulWidget {
   const AddNotePage({super.key});
@@ -150,7 +151,7 @@ class _AddNotePageState extends State<AddNotePage> {
 
 
 
-                        Navigator.pop(context);
+                        context.pop();
 
                       },
                       child: Text("Save", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.blue),)

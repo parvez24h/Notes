@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:notes/views/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -151,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                             sharedPreferences.setBool("auth", true);
 
 
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const HomePage()));
+                            GoRouter.of(context).go('/home');
                           }
 
                         },

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 import 'package:notes/views/addNotePage.dart';
 
 
@@ -57,9 +58,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (_)=>const AddNotePage())
-          );
+          GoRouter.of(context).push('/add');
         },
         child: Icon(Icons.add),
         tooltip: 'Add',

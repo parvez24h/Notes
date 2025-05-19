@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:notes/views/homePage.dart';
 import 'package:notes/views/loginPage.dart';
 import 'package:notes/views/registrationPage.dart';
@@ -23,9 +24,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     Future.delayed(const Duration(seconds: 3), (){
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_)=>mAuth?const HomePage():const LoginPage())
-      );
+      mAuth?GoRouter.of(context).go('/home'):GoRouter.of(context).go('/login');
     });
   }
 
