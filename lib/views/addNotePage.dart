@@ -1,21 +1,51 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class AddNotePage extends StatefulWidget {
+final titleProvider = StateProvider<String>((ref)=>"");
+final descriptionProvider = StateProvider<String>((ref)=>"");
+
+class AddNotePage extends ConsumerStatefulWidget {
   const AddNotePage({super.key});
 
   @override
-  State<AddNotePage> createState() => _AddNotePageState();
+  ConsumerState<AddNotePage> createState() => _AddNotePageState();
 }
 
-class _AddNotePageState extends State<AddNotePage> {
+class _AddNotePageState extends ConsumerState<AddNotePage> {
 
-  var titleEditingController = TextEditingController();
-  var descriptionEditingController = TextEditingController();
+  late TextEditingController titleEditingController;
+  late TextEditingController descriptionEditingController;
+
+  @override
+  void initState() {
+    titleEditingController = TextEditingController();
+    descriptionEditingController = TextEditingController();
+
+    titleEditingController.addListener((){
+      ref.read(titleProvider.notifier).state = titleEditingController.text;
+    });
+    descriptionEditingController.addListener((){
+      ref.read(descriptionProvider.notifier).state = descriptionEditingController.text;
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    titleEditingController.dispose();
+    descriptionEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    final title = ref.watch(titleProvider);
+    final description = ref.watch(descriptionProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -137,8 +167,6 @@ class _AddNotePageState extends State<AddNotePage> {
                       onPressed: () async{
 
 
-                        String title = titleEditingController.text.toString();
-                        String description = descriptionEditingController.text.toString();
 
 
                         FirebaseFirestore.instance.collection("notes").doc().set(
